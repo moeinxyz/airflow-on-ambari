@@ -16,7 +16,6 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
     <name>worker_container_repository</name>
     <value></value>
@@ -34,6 +33,11 @@
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>
+  </property>
+  <property>
+    <name>worker_container_image_pull_policy</name>
+    <value>IfNotPresent</value>
+    <display-name>Worker container image pull policy</display-name>
   </property>
   <property>
     <name>delete_worker_pods</name>
@@ -55,6 +59,12 @@
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>
+  </property>
+  <property>
+    <name>dags_in_image</name>
+    <value>False</value>
+    <display-name>Dags in image</display-name>
+    <description>For docker image already contains DAGs, this is set to `True`, and the worker will search for dags in dags_folder, otherwise use git sync or dags volume claim to mount DAGs.</description>
   </property>
   <property>
     <name>dags_volume_subpath</name>
@@ -91,6 +101,24 @@
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>
+  </property>
+  <property>
+      <name>dags_volume_host</name>
+      <value></value>
+      <display-name>Dags volume host</display-name>
+      <description>For DAGs mounted via a hostPath volume (mutually exclusive with volume claim and git-sync). Useful in local environment, discouraged in production.</description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
+      <name>logs_volume_host</name>
+      <value></value>
+      <display-name>Logs volume host</display-name>
+      <display-name>A hostPath volume for the logs. Useful in local environment, discouraged in production.</display-name>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
   </property>
   <property>
     <name>git_repo</name>
@@ -136,6 +164,25 @@
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>
+  </property>
+  <property>
+      <name>git_sync_root</name>
+      <value>/git</value>
+      <display-name>Git sync root</display-name>
+  </property>
+  <property>
+      <name>git_sync_dest</name>
+      <value>repo</value>
+      <display-name>Git sync dest</display-name>
+  </property>
+  <property>
+      <name>git_dags_folder_mount_point</name>
+      <value></value>
+      <display-name>Git dags folder mount point</display-name>
+      <description>Mount point of the volume if git-sync is being used. i.e. /usr/local/airflow/dags</description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
   </property>
   <property>
     <name>git_sync_container_repository</name>
@@ -187,5 +234,23 @@
     <value>True</value>
     <display-name>In cluster</display-name>
     <description>Use the service account kubernetes gives to pods to connect to kubernetes cluster. It's intended for clients that expect to be running inside a pod running on kubernetes. It will raise an exception if called from a process not running in a kubernetes environment.</description>
+  </property>
+  <property>
+      <name>affinity</name>
+      <value></value>
+      <display-name>Affinity</display-name>
+      <description>Affinity configuration as a single line formatted JSON object. See the affinity model for top-level key names (e.g. `nodeAffinity`, etc.):  https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#affinity-v1-core</description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
+      <name>tolerations</name>
+      <value></value>
+      <display-name>Tolerations</display-name>
+      <description>A list of toleration objects as a single line formatted JSON array. https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#toleration-v1-core</description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
   </property>
 </configuration>

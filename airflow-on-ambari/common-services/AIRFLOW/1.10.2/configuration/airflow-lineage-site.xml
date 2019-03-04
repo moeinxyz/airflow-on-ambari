@@ -16,12 +16,11 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>default_hive_mapred_queue</name>
+    <name>backend</name>
     <value></value>
-    <display-name>Default hive mapred queue</display-name>
-    <description>Default mapreduce queue for HiveOperator tasks.</description>
+    <display-name>Backend</display-name>
+    <description>What lineage backend to use.</description>
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>

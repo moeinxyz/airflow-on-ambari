@@ -16,7 +16,6 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
     <name>auth_backend</name>
     <value>airflow.api.auth.backend.default</value>

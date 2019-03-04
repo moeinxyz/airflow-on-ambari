@@ -16,35 +16,10 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>ccache</name>
-    <value>/tmp/airflow_krb5_ccache</value>
-    <display-name>Ccache</display-name>
-    <description></description>
-  </property>
-  <property>
-    <name>principal</name>
-    <value>airflow</value>
-    <display-name>Principal</display-name>
-    <description></description>
-  </property>
-  <property>
-    <name>reinit_frequency</name>
-    <value>3600</value>
-    <display-name>Reinit frequency</display-name>
-    <description></description>
-  </property>
-  <property>
-    <name>kinit_path</name>
-    <value>kinit</value>
-    <display-name>Kerberos kinit path</display-name>
-    <description></description>
-  </property>
-  <property>
-    <name>keytab</name>
-    <value>airflow.keytab</value>
-    <display-name>Keytab</display-name>
-    <description></description>
+    <name>api_rev</name>
+    <value>v3</value>
+    <display-name>API rev</display-name>
+    <description>API rev.</description>
   </property>
 </configuration>

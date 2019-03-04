@@ -16,35 +16,34 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>default_owner</name>
-    <value>Airflow</value>
-    <display-name>Default owner</display-name>
-    <description>The default owner assigned to each new operator, unless provided explicitly or passed via `default_args`.</description>
+    <name>ccache</name>
+    <value>/tmp/airflow_krb5_ccache</value>
+    <display-name>Ccache</display-name>
+    <description></description>
   </property>
   <property>
-    <name>default_cpus</name>
-    <value>1</value>
-    <display-name>Default cpus</display-name>
-    <description>Default cpus.</description>
+    <name>principal</name>
+    <value>airflow</value>
+    <display-name>Principal</display-name>
+    <description></description>
   </property>
   <property>
-    <name>default_ram</name>
-    <value>512</value>
-    <display-name>Default ram</display-name>
-    <description>Default ram.</description>
+    <name>reinit_frequency</name>
+    <value>3600</value>
+    <display-name>Reinit frequency</display-name>
+    <description></description>
   </property>
   <property>
-    <name>default_disk</name>
-    <value>512</value>
-    <display-name>Default disk</display-name>
-    <description>Default disk.</description>
+    <name>kinit_path</name>
+    <value>kinit</value>
+    <display-name>Kerberos kinit path</display-name>
+    <description></description>
   </property>
   <property>
-    <name>default_gpus</name>
-    <value>0</value>
-    <display-name>Default gpus</display-name>
-    <description>Default gpus.</description>
+    <name>keytab</name>
+    <value>airflow.keytab</value>
+    <display-name>Keytab</display-name>
+    <description></description>
   </property>
 </configuration>

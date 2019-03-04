@@ -16,14 +16,44 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>backend</name>
+    <name>sasl_enabled</name>
+    <value>False</value>
+    <display-name>Sasl enabled</display-name>
+    <description></description>
+  </property>
+  <property>
+    <name>host</name>
     <value></value>
-    <display-name>Backend</display-name>
-    <description>What lineage backend to use.</description>
+    <display-name>Host</display-name>
+    <description></description>
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
+    <name>port</name>
+    <value>21000</value>
+    <display-name>Port</display-name>
+    <description></description>
+  </property>
+  <property>
+    <name>username</name>
+    <value></value>
+    <display-name>Username</display-name>
+    <description></description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
+    <name>password</name>
+    <value></value>
+    <display-name>Password</display-name>
+    <description></description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+      <type>Password</type>
     </value-attributes>
   </property>
 </configuration>

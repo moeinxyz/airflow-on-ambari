@@ -15,37 +15,26 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<configuration>
-  <!--Configuration options for user authentication into the web application-->
+<configuration supports_final="true">
   <property>
-    <name>rabbitmq_username</name>
-    <value>airflow</value>
-    <display-name>RabbitMQ Username</display-name>
+    <name>elasticsearch_host</name>
+    <value></value>
+    <display-name>Elasticsearch host</display-name>
     <description></description>
-    <on-ambari-upgrade add="true"/>
-  </property>
-  <property>
-    <name>rabbitmq_password</name>
-    <value>drowssap</value>
-    <display-name>RabbitMQ Password</display-name>
-    <description>Default value is drowssap.</description>
     <value-attributes>
-      <type>Password</type>
+      <empty-value-valid>true</empty-value-valid>
     </value-attributes>
   </property>
-
   <property>
-    <name>rabbitmq_host</name>
-    <value>localhost</value>
-    <display-name>RabbitMQ Host</display-name>
-    <description></description>
-    <on-ambari-upgrade add="true"/>
+    <name>elasticsearch_log_id_template</name>
+    <value>{dag_id}-{task_id}-{execution_date}-{try_number}</value>
+    <display-name>Elasticsearch log id template</display-name>
+    <description>We need to escape the curly braces by adding an additional curly brace.</description>
   </property>
   <property>
-    <name>rabbitmq_vhost</name>
-    <value>airflow</value>
-    <display-name>RabbitMQ VHost</display-name>
+    <name>elasticsearch_end_of_log_mark</name>
+    <value>end_of_log</value>
+    <display-name>Elasticsearch end of log mark</display-name>
     <description></description>
-    <on-ambari-upgrade add="true"/>
   </property>
 </configuration>

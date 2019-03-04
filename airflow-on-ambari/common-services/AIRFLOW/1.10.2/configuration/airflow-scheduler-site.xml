@@ -16,16 +16,15 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
     <name>job_heartbeat_sec</name>
-    <value>5</value>
+    <value>50</value>
     <display-name>Job heartbeat sec</display-name>
     <description>Task instances listen for external kill signal (when you clear tasks from the CLI or the UI), this defines the frequency at which they should listen (in seconds).</description>
   </property>
   <property>
     <name>scheduler_heartbeat_sec</name>
-    <value>5</value>
+    <value>50</value>
     <display-name>Scheduler heartbeat sec</display-name>
     <description>The scheduler constantly tries to trigger new tasks (look at the scheduler section in the docs for more information). This defines how often the scheduler should run (in seconds).</description>
   </property>
@@ -43,13 +42,13 @@
   </property>
   <property>
     <name>dag_dir_list_interval</name>
-    <value>300</value>
+    <value>150</value>
     <display-name>Dag dir list interval</display-name>
     <description>Dag dir list interval.</description>
   </property>
   <property>
     <name>print_stats_interval</name>
-    <value>30</value>
+    <value>10</value>
     <display-name>Print stats interval</display-name>
     <description>How often should stats be printed to the logs.</description>
   </property>

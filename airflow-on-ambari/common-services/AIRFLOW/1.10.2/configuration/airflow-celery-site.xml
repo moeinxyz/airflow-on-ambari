@@ -16,7 +16,6 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
     <name>celery_app_name</name>
     <value>airflow.executors.celery_executor</value>
@@ -24,9 +23,9 @@
     <description>The app name that will be used by celery.</description>
   </property>
   <property>
-    <name>celeryd_concurrency</name>
+    <name>worker_concurrency</name>
     <value>16</value>
-    <display-name>Celeryd concurrency</display-name>
+    <display-name>Worker concurrency</display-name>
     <description>The concurrency that will be used when starting workers with the "airflow worker" command. This defines the number of task instances that a worker will take, so size up your workers based on the resources on your worker box and the nature of your tasks.</description>
   </property>
   <property>
@@ -34,6 +33,12 @@
     <value>8793</value>
     <display-name>Worker log server port</display-name>
     <description>When you start an airflow worker, airflow starts a tiny web server subprocess to serve the workers local log files to the airflow main web server, who then builds pages and sends them to users. This defines the port on which the logs are served. It needs to be unused, and open visible from the main web server to connect into the workers.</description>
+  </property>
+  <property>
+    <name>result_backend</name>
+    <value>db+mysql://airflow:airflow@localhost:3306/airflow</value>
+    <display-name>Result backend</display-name>
+    <description>The Celery result_backend. When a job finishes, it needs to update the metadata of the job. Therefore it will post a message on a message bus, or insert it into a database (depending of the backend). This status is used by the scheduler to update the state of the task. The use of a database is highly recommended. http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-result-backend-settings</description>
   </property>
   <property>
     <name>flower_host</name>
@@ -58,7 +63,7 @@
   </property>
   <property>
     <name>default_queue</name>
-    <value>default</value>
+    <value>task</value>
     <display-name>Default queue</display-name>
     <description>Default queue that tasks get assigned to and that worker listen on.</description>
   </property>

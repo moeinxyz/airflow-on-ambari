@@ -16,17 +16,34 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>api_client</name>
-    <value>airflow.api.client.local_client</value>
-    <display-name>API client</display-name>
-    <description>In what way should the cli access the API. The LocalClient will use the database directly, while the json_client will use the api running on the webserver.</description>
+    <name>default_owner</name>
+    <value>Airflow</value>
+    <display-name>Default owner</display-name>
+    <description>The default owner assigned to each new operator, unless provided explicitly or passed via `default_args`.</description>
   </property>
   <property>
-    <name>endpoint_url</name>
-    <value>http://localhost:8000</value>
-    <display-name>Endpoint URL</display-name>
-    <description>Endpoint URL.</description>
+    <name>default_cpus</name>
+    <value>1</value>
+    <display-name>Default cpus</display-name>
+    <description>Default cpus.</description>
+  </property>
+  <property>
+    <name>default_ram</name>
+    <value>512</value>
+    <display-name>Default ram</display-name>
+    <description>Default ram.</description>
+  </property>
+  <property>
+    <name>default_disk</name>
+    <value>512</value>
+    <display-name>Default disk</display-name>
+    <description>Default disk.</description>
+  </property>
+  <property>
+    <name>default_gpus</name>
+    <value>0</value>
+    <display-name>Default gpus</display-name>
+    <description>Default gpus.</description>
   </property>
 </configuration>

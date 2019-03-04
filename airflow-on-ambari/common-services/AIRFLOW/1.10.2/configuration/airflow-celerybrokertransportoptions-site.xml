@@ -16,11 +16,10 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>hide_sensitive_variable_fields</name>
-    <value>True</value>
-    <display-name>Hide sensitive variable fields</display-name>
-    <description>UI to hide sensitive variable fields when set to True.</description>
+    <name>visibility_timeout</name>
+    <value>21600</value>
+    <display-name>Visibility timeout</display-name>
+    <description> The visibility timeout defines the number of seconds to wait for the worker to acknowledge the task before the message is redelivered to another worker. Make sure to increase the visibility timeout to match the time of the longest ETA you're planning to use. visibility_timeout is only supported for Redis and SQS celery brokers. See: http://docs.celeryproject.org/en/master/userguide/configuration.html#std:setting-broker_transport_options.</description>
   </property>
 </configuration>

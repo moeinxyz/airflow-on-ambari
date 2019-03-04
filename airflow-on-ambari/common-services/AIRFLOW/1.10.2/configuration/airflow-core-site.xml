@@ -16,8 +16,6 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
-
   <property>
     <name>airflow_home</name>
     <value>/usr/local/airflow</value>
@@ -162,7 +160,7 @@
   </property>
   <property>
     <name>sql_alchemy_pool_recycle</name>
-    <value>3600</value>
+    <value>1800</value>
     <display-name>SQL alchemy pool recycle</display-name>
     <description>The SqlAlchemy pool recycle is the number of seconds a connection can be idle in the pool before it is invalidated. This config does not apply to sqlite.</description>
   </property>
@@ -204,7 +202,7 @@
   </property>
   <property>
     <name>load_examples</name>
-    <value>True</value>
+    <value>False</value>
     <display-name>Load examples</display-name>
     <description>Whether to load the examples that ship with Airflow. It's good to get started, but you probably want to set this to False in a production environment.</description>
   </property>
@@ -216,7 +214,7 @@
   </property>
   <property>
     <name>fernet_key</name>
-    <value>qDLq7g86uuqVGsuhpUIGwOgaVgqZmrvdSQoBItIlKI4=</value>
+    <value>XKQ7xqzqAgM9doLL3PLsM8MYO6RWItA4HADnKviyLwY=</value>
     <display-name>Fernet key</display-name>
     <description>Secret key to save connection passwords in the db.</description>
   </property>

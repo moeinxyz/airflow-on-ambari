@@ -16,11 +16,10 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
-    <name>api_rev</name>
-    <value>v3</value>
-    <display-name>API rev</display-name>
-    <description>API rev.</description>
+    <name>email_backend</name>
+    <value>airflow.utils.email.send_email_smtp</value>
+    <display-name>Email backend</display-name>
+    <description>Email backend.</description>
   </property>
 </configuration>

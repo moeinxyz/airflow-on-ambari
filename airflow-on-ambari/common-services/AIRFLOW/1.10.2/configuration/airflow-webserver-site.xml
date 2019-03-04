@@ -16,7 +16,6 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
-  <!--Configuration options for user authentication into the web application-->
   <property>
     <name>base_url</name>
     <value>http://localhost</value>
@@ -79,7 +78,7 @@
   </property>
   <property>
     <name>secret_key</name>
-    <value>temporary_key</value>
+    <value>some_secret_key</value>
     <display-name>Secret key</display-name>
     <description>Secret key used to run your flask app.</description>
   </property>
