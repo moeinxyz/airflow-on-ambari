@@ -126,7 +126,6 @@ def generate_airflow_sectional_configuration(sections, params):
             section_config += format("{key} = {value}\n")
         if section == "celery":
             section_config += "broker_url = {0}\n".format(params.celery_site_broker_url)
-            section_config += "result_backend = {0}\n".format(params.celery_site_result_backend)
         result[section] = section_config
 
     return result
