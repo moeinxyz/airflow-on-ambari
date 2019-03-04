@@ -24,7 +24,10 @@ class AirflowScheduler(Script):
         env.set_params(params)
         Logger.info("Configure Airflow Scheduler")
         generate_airflow_config_file(params)
-        configure_rabbitmq(params)
+
+        if params.config['configurations']['airflow-core-site']['executor'] == "CeleryExecutor":
+            configure_rabbitmq(params)
+
         Execute("export AIRFLOW_HOME={0} && airflow initdb".format(params.airflow_home))
 
     def start(self, env):
