@@ -156,6 +156,7 @@ def generate_airflow_config_file(params):
         "celery_broker_transport_options": params.config['configurations']['airflow-celerybrokertransportoptions-site'],
         "elasticsearch": params.config['configurations']['airflow-elasticsearch-site'],
         "kubernetes": params.config['configurations']['airflow-kubernetes-site'],
+        "kubernetes_node_selectors": params.config['configurations']['airflow-kubernetesnodeselectors-site'],
         "kubernetes_secrets": params.config['configurations']['airflow-kubernetessecrets-site']
     }, params)
 
