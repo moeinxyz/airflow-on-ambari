@@ -9,7 +9,7 @@ class AirflowWebserver(Script):
         env.set_params(params)
         Logger.info("Install packages (dependencies)")
         self.install_packages(env)
-        Execute("pip install --upgrade pip")
+        Execute("python3 -m pip install --upgrade pip")
         Execute("pip install --upgrade setuptools")
         Execute("pip install --upgrade  docutils pytest-runner Cython")
         Execute("export SLUGIFY_USES_TEXT_UNIDECODE=yes && pip install --upgrade apache-airflow[all]==1.10.0")
