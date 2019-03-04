@@ -18,7 +18,6 @@ class AirflowWorker(Script):
         Execute("chmod 755 /usr/local/bin/airflow /usr/local/airflow")
         Execute("chown -R {0}:{1} {2}".format(params.airflow_user, params.airflow_group, params.airflow_home))
 
-
     def configure(self, env):
         import params
         env.set_params(params)
