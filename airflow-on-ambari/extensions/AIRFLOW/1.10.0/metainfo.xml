@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<metainfo>
+    <stacks>
+        <stack>
+            <name>HDP</name>
+            <version>2.6</version>
+        </stack>
+        <stack>
+            <name>HDP</name>
+            <version>2.7</version>
+        </stack>
+        <stack>
+            <name>HDP</name>
+            <version>3.0</version>
+        </stack>
+        <stack>
+            <name>HDP</name>
+            <version>3.1</version>
+        </stack>
+    </stacks>
+</metainfo>
