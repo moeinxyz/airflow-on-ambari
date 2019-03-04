@@ -3,7 +3,7 @@ from resource_management.core.resources.system import Execute
 from resource_management.libraries.script import Script
 from resource_management.core.logger import Logger
 
-class AirflowWebserver(Script):
+class AirflowScheduler(Script):
     def install(self, env):
         import params
         env.set_params(params)
@@ -12,42 +12,44 @@ class AirflowWebserver(Script):
         Execute("python3 -m pip install --upgrade pip")
         Execute("pip install --upgrade setuptools")
         Execute("pip install --upgrade  docutils pytest-runner Cython")
-        Execute("export SLUGIFY_USES_TEXT_UNIDECODE=yes && pip install --upgrade apache-airflow[all]==1.10.0")
+        Execute("export SLUGIFY_USES_TEXT_UNIDECODE=yes && pip install --upgrade apache-airflow[all]==1.10.2")
         create_user(params)
         create_directories(params)
         Execute("chmod 755 /usr/local/bin/airflow /usr/local/airflow")
         Execute("chown -R {0}:{1} {2}".format(params.airflow_user, params.airflow_group, params.airflow_home))
-        configure_systemctl("webserver", params)
+        configure_systemctl("scheduler", params)
 
     def configure(self, env):
         import params
         env.set_params(params)
-        Logger.info("Configure airflow webserver")
+        Logger.info("Configure Airflow Scheduler")
         generate_airflow_config_file(params)
+        configure_rabbitmq(params)
+        Execute("export AIRFLOW_HOME={0} && airflow initdb".format(params.airflow_home))
 
     def start(self, env):
         import params
         env.set_params(params)
         self.configure(env)
-        Logger.info("Start airflow webserver")
-        Execute("sudo service airflow-webserver start")
+        Logger.info("Start airflow scheduler")
+        Execute("sudo service airflow-scheduler start")
 
     def stop(self, env):
         import params
         env.set_params(params)
-        Logger.info("Stop airflow webserver")
-        Execute("sudo service airflow-webserver stop")
+        Logger.info("Stop airflow scheduler")
+        Execute("sudo service airflow-scheduler stop")
 
     def status(self, env):
         import params
         env.set_params(params)
-        Logger.info("Check Airflow webserver status")
+        Logger.info("Check Airflow Scheduler status")
         service_check(
-          cmd="service airflow-webserver status",
+          cmd="service airflow-scheduler status",
           user=params.airflow_user,
-          label="Airflow Webserver"
+          label="Airflow Scheduler"
         )
 
 
 if __name__ == "__main__":
-    AirflowWebserver().execute()
+    AirflowScheduler().execute()

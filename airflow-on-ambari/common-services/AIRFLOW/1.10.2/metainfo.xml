@@ -22,7 +22,7 @@
 			<name>AIRFLOW</name>
 			<displayName>Airflow</displayName>
 			<comment>Airflow is a platform to programmatically author, schedule and monitor workflows.</comment>
-			<version>1.10.0</version>
+			<version>1.10.2</version>
 			<components>
 				<component>
 					<name>AIRFLOW_WEBSERVER</name>
