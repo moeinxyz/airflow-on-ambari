@@ -77,16 +77,22 @@ def configure_rabbitmq(params):
 
 def configure_systemctl(type, params):
     if type == "scheduler":
+        user = "root"
+        group = "root"
         description = "Airflow Scheduler"
         exec_start = "/usr/local/bin/airflow scheduler"
         exec_stop = "/bin/ps aux | /bin/grep \"airflow-scheduler\" | /bin/grep -v grep | /usr/bin/awk '{{print $2}}' | /usr/bin/xargs -r kill -9"
         path = "/etc/systemd/system/airflow-scheduler.service"
     elif type == "webserver":
+        user = params.airflow_user
+        group = params.airflow_group
         description = "Airflow Web Server"
         exec_start = "/usr/local/bin/airflow webserver"
         exec_stop = "/bin/ps aux | /bin/grep \"airflow-webserver\" | /bin/grep -v grep | /usr/bin/awk '{{print $2}}' | /usr/bin/xargs -r kill -9"
         path = "/etc/systemd/system/airflow-webserver.service"
     else:
+        user = params.airflow_user
+        group = params.airflow_group
         description = "Airflow Worker"
         exec_start = "/usr/local/bin/airflow worker -q {0}".format(params.config['configurations']['airflow-celery-site']['default_queue'])
         exec_stop = "/bin/ps aux | /bin/grep \"airflow serve_logs\" | /bin/grep -v grep | /usr/bin/awk '{{print $2}}' | /usr/bin/xargs -r kill -9"
@@ -107,8 +113,7 @@ def configure_systemctl(type, params):
         "RestartSec=5s\n" \
         "PrivateTmp=true\n" \
         "[Install]\n" \
-        "WantedBy=multi-user.target".format(description, params.airflow_user, params.airflow_group,
-                                            exec_start, exec_stop, params.airflow_home)
+        "WantedBy=multi-user.target".format(description, user, group,exec_start, exec_stop, params.airflow_home)
 
     File(path,owner="root",group="root",content=content)
     Execute("systemctl daemon-reload")
