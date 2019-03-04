@@ -63,7 +63,7 @@
   </property>
   <property>
     <name>default_queue</name>
-    <value>task</value>
+    <value>tasks</value>
     <display-name>Default queue</display-name>
     <description>Default queue that tasks get assigned to and that worker listen on.</description>
   </property>

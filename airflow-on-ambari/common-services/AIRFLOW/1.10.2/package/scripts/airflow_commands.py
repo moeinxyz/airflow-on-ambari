@@ -88,7 +88,7 @@ def configure_systemctl(type, params):
         path = "/etc/systemd/system/airflow-webserver.service"
     else:
         description = "Airflow Worker"
-        exec_start = "/usr/local/bin/airflow worker"
+        exec_start = "/usr/local/bin/airflow worker -q {0}".format(params.config['configurations']['airflow-celery-site']['default_queue'])
         exec_stop = "/bin/ps aux | /bin/grep \"airflow serve_logs\" | /bin/grep -v grep | /usr/bin/awk '{{print $2}}' | /usr/bin/xargs -r kill -9"
         path = "/etc/systemd/system/airflow-worker.service"
 
