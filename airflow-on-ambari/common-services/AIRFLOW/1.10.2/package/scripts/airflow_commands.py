@@ -16,7 +16,7 @@ def create_user(params):
     Logger.info("Creating user={0} in group={1}".format(params.airflow_user, params.airflow_group))
     Execute("groupadd {0}".format(params.airflow_group), ignore_failures=True)
     Execute("useradd -m -g {0} {1}".format(params.airflow_user, params.airflow_group), ignore_failures=True)
-
+    Execute("usermod -d {0} {1}".format(params.airflow_home, params.airflow_user))
 
 def create_directories(params):
     """
