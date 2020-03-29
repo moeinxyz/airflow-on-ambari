@@ -12,7 +12,7 @@ class AirflowWebserver(Script):
         create_user(params)
         create_directories(params)
         Execute("sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen")
-        Execute("locate-gen")
+        Execute("locale-gen")
         Execute("update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8")
         Execute("python3 -m pip install --upgrade pip")
         Execute("pip3 install -U pip setuptools wheel")
