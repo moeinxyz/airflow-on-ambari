@@ -21,7 +21,7 @@
 		<service>
 			<name>AIRFLOW</name>
 			<displayName>Airflow</displayName>
-			<comment>Airflow is a platform to programmatically author, schedule and monitor workflows.</comment>
+			<comment>Airflow is a platform to programmatically author, schedule and monitor workflow.</comment>
 			<version>1.10.9</version>
 			<components>
 				<component>
