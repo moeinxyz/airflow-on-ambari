@@ -11,7 +11,7 @@ from resource_management.libraries.functions.get_user_call_output import get_use
 
 def create_user(params):
     """
-    Creates the user required for Airflow.
+    Creates the user and add it to the corresponding group
     """
     Logger.info("Creating user={0} in group={1}".format(params.airflow_user, params.airflow_group))
     Execute("groupadd {0}".format(params.airflow_group), ignore_failures=True)
@@ -20,7 +20,7 @@ def create_user(params):
 
 def create_directories(params):
     """
-    Creates one or more directories.
+    Creates directories
     """
     Logger.info("Creating directories")
     Directory(params.dirs,
@@ -76,6 +76,9 @@ def configure_rabbitmq(params):
 
 
 def configure_systemctl(type, params):
+    """
+    Rewrite systemd service for a specific airflow component
+    """
     if type == "scheduler":
         user = "root"
         group = "root"
@@ -137,6 +140,9 @@ def generate_airflow_sectional_configuration(sections, params):
 
 
 def generate_airflow_config_file(params):
+    """
+    Rewrite airflow config file
+    """
     airflow_config_file = ""
 
     airflow_config = generate_airflow_sectional_configuration({

@@ -22,7 +22,7 @@
 			<name>AIRFLOW</name>
 			<displayName>Airflow</displayName>
 			<comment>Airflow is a platform to programmatically author, schedule and monitor workflows.</comment>
-			<version>1.10.2</version>
+			<version>1.10.9</version>
 			<components>
 				<component>
 					<name>AIRFLOW_WEBSERVER</name>
@@ -63,19 +63,23 @@
 				<osSpecific>
 					<osFamily>debian8,ubuntu16,ubuntu18</osFamily>
 					<packages>
-						<package><name>libmysqlclient-dev</name></package>
-						<package><name>libssl-dev</name></package>
-						<package><name>libkrb5-dev</name></package>
-						<package><name>libssl-dev</name></package>
+						<package><name>freetds-dev</name></package>
+        				<package><name>libkrb5-dev</name></package>
+        				<package><name>libsasl2-dev</name></package>
+        				<package><name>libssl-dev</name></package>
+        				<package><name>libffi-dev</name></package>
+        				<package><name>libpq-dev</name></package>
+        				<package><name>git</name></package>
+						<package><name>freetds-bin</name></package>
+        				<package><name>build-essential</name></package>
+        				<package><name>default-libmysqlclient-dev</name></package>
+        				<package><name>apt-utils</name></package>
+        				<package><name>curl</name></package>
+        				<package><name>rsync</name></package>
+        				<package><name>netcat</name></package>
+        				<package><name>locales</name></package>
 						<package><name>python3-dev</name></package>
 						<package><name>python3-pip</name></package>
-						<package><name>build-essential</name></package>
-						<package><name>libghc-zlib-dev</name></package>
-						<package><name>libzip-dev</name></package>
-						<package><name>libncurses5-dev</name></package>
-						<package><name>wget</name></package>
-						<package><name>build-essential</name></package>
-						<package><name>libsasl2-dev</name></package>
 					</packages>
 				</osSpecific>
 			</osSpecifics>
