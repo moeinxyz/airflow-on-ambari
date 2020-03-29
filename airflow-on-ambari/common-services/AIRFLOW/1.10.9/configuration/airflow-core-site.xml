@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-       http://www.apache.org/licenses/LICENSE-2.0
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 <configuration supports_final="true">
   <property>
     <name>airflow_home</name>
@@ -22,7 +7,6 @@
     <display-name>Airflow home</display-name>
     <description>The home folder for airflow, default is airflow_install_dir/airflow.</description>
   </property>
-
   <property>
     <name>dags_folder</name>
     <value>/usr/local/airflow/dags</value>
@@ -87,6 +71,18 @@
     </value-attributes>
   </property>
   <property>
+    <name>colored_console_log</name>
+    <value>True</value>
+    <display-name>Colored Console Log</display-name>
+    <description>Flag to enable/disable Colored logs in Console Colour the logs when the controlling terminal is a TTY.</description>
+  </property>
+  <property>
+    <name>colored_log_format</name>
+    <value>[%%(blue)s%%(asctime)s%%(reset)s] {%%(blue)s%%(filename)s:%%(reset)s%%(lineno)d} %%(log_color)s%%(levelname)s%%(reset)s - %%(log_color)s%%(message)s%%(reset)s</value>
+    <display-name>Colored Log Format</display-name>
+    <description>Log format for when Colored logs is enabled</description>
+  </property>
+  <property>
     <name>log_format</name>
     <value>[%%(asctime)s] {%%(filename)s:%%(lineno)d} %%(levelname)s - %%(message)s</value>
     <display-name>Log format</display-name>
@@ -98,6 +94,7 @@
     <display-name>Simple log format</display-name>
     <description>Simple log format.</description>
   </property>
+  <!-- Log filename format -->
   <property>
     <name>log_filename_template</name>
     <value>{{ ti.dag_id }}/{{ ti.task_id }}/{{ ts }}/{{ try_number }}.log</value>
@@ -117,6 +114,12 @@
     <description>We need to escape the curly braces by adding an additional curly brace.</description>
   </property>
   <property>
+    <name>task_log_reader</name>
+    <value>task</value>
+    <display-name>Task Log Reader</display-name>
+    <description>Name of handler to read task instance logs. Default to use task handler.</description>
+  </property>
+  <property>
     <name>hostname_callable</name>
     <value>socket:getfqdn</value>
     <display-name>Hostname callable</display-name>
@@ -130,7 +133,7 @@
   </property>
   <property>
     <name>executor</name>
-    <value>LocalExecutor</value>
+    <value>SequentialExecutor</value>
     <display-name>Executor</display-name>
     <description>The executor class that airflow should use. Choices include SequentialExecutor, LocalExecutor, CeleryExecutor, DaskExecutor.</description>
   </property>
@@ -159,16 +162,22 @@
     <description>The SqlAlchemy pool size is the maximum number of database connections in the pool.</description>
   </property>
   <property>
+    <name>sql_alchemy_max_overflow</name>
+    <value>10</value>
+    <display-name>Sql alchemy max overflow</display-name>
+    <description>The maximum overflow size of the pool. When the number of checked-out connections reaches the size set in pool_size, additional connections will be returned up to this limit. When those additional connections are returned to the pool, they are disconnected and discarded. It follows then that the total number of simultaneous connections the pool will allow is pool_size + max_overflow, and the total number of "sleeping" connections the pool will allow is pool_size. max_overflow can be set to -1 to indicate no overflow limit; no limit will be placed on the total number of concurrent connections. Defaults to 10.</description>
+  </property>
+  <property>
     <name>sql_alchemy_pool_recycle</name>
     <value>1800</value>
     <display-name>SQL alchemy pool recycle</display-name>
     <description>The SqlAlchemy pool recycle is the number of seconds a connection can be idle in the pool before it is invalidated. This config does not apply to sqlite.</description>
   </property>
   <property>
-    <name>sql_alchemy_reconnect_timeout</name>
-    <value>300</value>
-    <display-name>SQL alchemy pool timeout</display-name>
-    <description>How many seconds to retry re-establishing a DB connection after disconnects. Setting this to 0 disables retries.</description>
+    <name>sql_alchemy_pool_pre_ping</name>
+    <value>True</value>
+    <display-name>SQL alchemy pool pre ping</display-name>
+    <description>Check connection at the start of each connection pool checkout. Typically, this is a simple statement like "SELECT 1". More information here: https://docs.sqlalchemy.org/en/13/core/pooling.html#disconnect-handling-pessimistic</description>
   </property>
   <property>
     <name>parallelism</name>
@@ -232,7 +241,7 @@
   </property>
   <property>
     <name>task_runner</name>
-    <value>BashTaskRunner</value>
+    <value>StandardTaskRunner</value>
     <display-name>Task runner</display-name>
     <description>The class to use for running task instances in a subprocess.</description>
   </property>
@@ -267,12 +276,6 @@
     <description>Turn unit test mode on (overwrites many configuration options with test values at runtime).</description>
   </property>
   <property>
-    <name>task_log_reader</name>
-    <value>task</value>
-    <display-name>Task log reader</display-name>
-    <description>Name of handler to read task instance logs. Default to use file task handler.</description>
-  </property>
-  <property>
     <name>enable_xcom_pickling</name>
     <value>True</value>
     <display-name>Enable xcom pickling</display-name>
@@ -295,5 +298,35 @@
     <value>True</value>
     <display-name>Worker Precheck</display-name>
     <description>Worker initialisation check to validate Metadata Database connection.</description>
+  </property>
+  <property>
+    <name>dag_discovery_safe_mode</name>
+    <value>True</value>
+    <display-name>Dag discovery safe mode</display-name>
+    <description>When discovering DAGs, ignore any files that don't contain the strings ``DAG`` and ``airflow``.</description>
+  </property>
+  <property>
+    <name>default_task_retries</name>
+    <value>0</value>
+    <display-name>Default task retries</display-name>
+    <description>The number of retries each task is going to have by default. Can be overridden at dag or task level.</description>
+  </property>
+  <property>
+    <name>store_serialized_dags</name>
+    <value>False</value>
+    <display-name>Store serialized dags</display-name>
+    <description>Whether to serialises DAGs and persist them in DB. If set to True, Webserver reads from DB instead of parsing DAG files More details: https://airflow.apache.org/docs/stable/dag-serialization.html</description>
+  </property>
+  <property>
+    <name>min_serialized_dag_update_interval</name>
+    <value>30</value>
+    <display-name>Min serialized dag update interval</display-name>
+    <description>Updating serialized DAG can not be faster than a minimum interval to reduce database write rate.</description>
+  </property>
+  <property>
+    <name>check_slas</name>
+    <value>True</value>
+    <display-name>Check slas</display-name>
+    <description>On each dagrun check against defined SLAs</description>
   </property>
 </configuration>
