@@ -16,6 +16,7 @@
   limitations under the License.
 -->
 <configuration supports_final="true">
+<!-- This section only applies if you are using the CeleryExecutor in the core section above -->
   <property>
     <name>celery_app_name</name>
     <value>airflow.executors.celery_executor</value>
@@ -29,10 +30,22 @@
     <description>The concurrency that will be used when starting workers with the "airflow worker" command. This defines the number of task instances that a worker will take, so size up your workers based on the resources on your worker box and the nature of your tasks.</description>
   </property>
   <property>
+    <name>worker_autoscale</name>
+    <value>16,12</value>
+    <display-name>Worker Auto Scale</display-name>
+    <description>  The maximum and minimum concurrency that will be used when starting workers with the `airflow celery worker` command (always keep minimum processes, but grow to maximum if necessary). Note the value should be max_concurrency,min_concurrency Pick these numbers based on resources on worker box and the nature of the task. If autoscale option is available, worker_concurrency will be ignored. http://docs.celeryproject.org/en/latest/reference/celery.bin.worker.html#cmdoption-celery-worker-autoscale Example: worker_autoscale = 16,12</description>
+  </property>
+  <property>
     <name>worker_log_server_port</name>
     <value>8793</value>
     <display-name>Worker log server port</display-name>
     <description>When you start an airflow worker, airflow starts a tiny web server subprocess to serve the workers local log files to the airflow main web server, who then builds pages and sends them to users. This defines the port on which the logs are served. It needs to be unused, and open visible from the main web server to connect into the workers.</description>
+  </property>
+  <property>
+    <name>broker_url</name>
+    <value>db+mysql://airflow:airflow@localhost:3306/airflow</value>
+    <display-name>Broker URL</display-name>
+    <description>The Celery broker URL. Celery supports RabbitMQ, Redis and experimentally a sqlalchemy database. Refer to the Celery documentation for more information. http://docs.celeryproject.org/en/latest/userguide/configuration.html#broker-settings</description>
   </property>
   <property>
     <name>result_backend</name>
@@ -62,10 +75,25 @@
     <description>This defines the port that Celery Flower runs on.</description>
   </property>
   <property>
+    <name>flower_basic_auth</name>
+    <value></value>
+    <display-name>Flower Basic Auth</display-name>
+    <description>Securing Flower with Basic Authentication. Accepts user:password pairs separated by a comma. Example: flower_basic_auth = user1:password1,user2:password2</description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
     <name>default_queue</name>
     <value>tasks</value>
     <display-name>Default queue</display-name>
     <description>Default queue that tasks get assigned to and that worker listen on.</description>
+  </property>
+  <property>
+    <name>sync_parallelism</name>
+    <value>0</value>
+    <display-name>Sync Parallelism</display-name>
+    <description>How many processes CeleryExecutor uses to sync task state. 0 means to use max(1, number of cores - 1) processes.</description>
   </property>
   <property>
     <name>celery_config_options</name>
@@ -105,5 +133,17 @@
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>
+  </property>
+  <property>
+    <name>pool</name>
+    <value>prefork</value>
+    <display-name>Pool</display-name>
+    <description>Celery Pool implementation. Choices include: prefork (default), eventlet, gevent or solo. https://docs.celeryproject.org/en/latest/userguide/workers.html#concurrency https://docs.celeryproject.org/en/latest/userguide/concurrency/eventlet.html</description>
+  </property>
+  <property>
+    <name>operation_timeout</name>
+    <value>2</value>
+    <display-name>Operation Timeout</display-name>
+    <description>The number of seconds to wait before timing out ``send_task_to_executor`` or ``fetch_celery_task_state`` operations.</description>
   </property>
 </configuration>

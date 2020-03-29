@@ -61,20 +61,6 @@ def service_check(cmd, user, label):
       Logger.error(err_msg)
       raise ExecutionFailed(err_msg, rc, out, err)
 
-
-def configure_rabbitmq(params):
-    """
-    Configure RabbitMQ for Airflow tasks
-    """
-    rabbitmq_username = params.config['configurations']['airflow-env']['rabbitmq_username']
-    rabbitmq_password = params.config['configurations']['airflow-env']['rabbitmq_password']
-    rabbitmq_vhost = params.config['configurations']['airflow-env']['rabbitmq_vhost']
-    Execute("sudo rabbitmqctl add_user {0} {1}".format(rabbitmq_username, rabbitmq_password), ignore_failures=True)
-    Execute("sudo rabbitmqctl change_password {0} {1}".format(rabbitmq_username, rabbitmq_password))
-    Execute("sudo rabbitmqctl add_vhost {0}".format(rabbitmq_vhost), ignore_failures=True)
-    Execute("sudo rabbitmqctl set_permissions -p {0} {1} \".*\" \".*\" \".*\"".format(rabbitmq_vhost, rabbitmq_username), ignore_failures=True)
-
-
 def configure_systemctl(type, params):
     """
     Rewrite systemd service for a specific airflow component
