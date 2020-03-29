@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-       http://www.apache.org/licenses/LICENSE-2.0
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 <configuration supports_final="true">
   <property>
     <name>worker_container_repository</name>
@@ -54,8 +39,17 @@
   <property>
     <name>airflow_configmap</name>
     <value></value>
-    <display-name>Airflow configmap</display-name>
+    <display-name>Airflow config map</display-name>
     <description>The name of the Kubernetes ConfigMap Containing the Airflow Configuration (this file).</description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
+    <name>airflow_local_settings_configmap</name>
+    <value></value>
+    <display-name>Airflow local settings config map</display-name>
+    <description>The name of the Kubernetes ConfigMap containing ``airflow_local_settings.py`` file.</description>
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>
@@ -121,6 +115,15 @@
       </value-attributes>
   </property>
   <property>
+      <name>env_from_secret_ref</name>
+      <value></value>
+      <display-name>Env from secret ref</display-name>
+      <display-name>A list of secretRefs to envFrom. If more than one secret is specified, provide a comma separated list: secret_a,secret_b</display-name>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
     <name>git_repo</name>
     <value></value>
     <display-name>Git repo</display-name>
@@ -139,6 +142,23 @@
     </value-attributes>
   </property>
   <property>
+    <name>git_subpath</name>
+    <value></value>
+    <display-name>Git subpath</display-name>
+    <description>Git credentials and repository for DAGs mounted via Git (mutually exclusive with volume claim).</description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
+    <name>git_sync_rev</name>
+    <value></value>
+    <display-name>Git sync rev</display-name>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
     <name>git_user</name>
     <value></value>
     <display-name>Git user</display-name>
@@ -151,15 +171,6 @@
     <name>git_password</name>
     <value></value>
     <display-name>Git password</display-name>
-    <description>Git credentials and repository for DAGs mounted via Git (mutually exclusive with volume claim).</description>
-    <value-attributes>
-      <empty-value-valid>true</empty-value-valid>
-    </value-attributes>
-  </property>
-  <property>
-    <name>git_subpath</name>
-    <value></value>
-    <display-name>Git subpath</display-name>
     <description>Git credentials and repository for DAGs mounted via Git (mutually exclusive with volume claim).</description>
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
@@ -185,6 +196,33 @@
       </value-attributes>
   </property>
   <property>
+      <name>git_ssh_key_secret_name</name>
+      <value></value>
+      <display-name>Git ssh key secret name</display-name>
+      <description></description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
+      <name>git_ssh_known_hosts_configmap_name</name>
+      <value></value>
+      <display-name>Git ssh known hosts configmap name</display-name>
+      <description></description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
+      <name>git_sync_credentials_secret</name>
+      <value></value>
+      <display-name>Git sync credentials secret</display-name>
+      <description></description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
     <name>git_sync_container_repository</name>
     <value>gcr.io/google-containers/git-sync-amd64</value>
     <display-name>Git sync container repository</display-name>
@@ -192,7 +230,7 @@
   </property>
   <property>
     <name>git_sync_container_tag</name>
-    <value>v2.0.5</value>
+    <value>v3.1.1</value>
     <display-name>Git sync container tag</display-name>
     <description>For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync</description>
   </property>
@@ -200,6 +238,12 @@
     <name>git_sync_init_container_name</name>
     <value>git-sync-clone</value>
     <display-name>Git sync init container name</display-name>
+    <description>For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync</description>
+  </property>
+  <property>
+    <name>git_sync_run_as_user</name>
+    <value>65533</value>
+    <display-name>Git sync run as user</display-name>
     <description>For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync</description>
   </property>
   <property>
@@ -249,6 +293,30 @@
       <value></value>
       <display-name>Tolerations</display-name>
       <description>A list of toleration objects as a single line formatted JSON array. https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#toleration-v1-core</description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
+      <name>kube_client_request_args</name>
+      <value>{"_request_timeout" : [60,60] }</value>
+      <display-name>Kube client request args</display-name>
+      <description>Keyword parameters to pass while calling a kubernetes client core_v1_api methods from Kubernetes Executor provided as a single line formatted JSON dictionary string. List of supported params are similar for all core_v1_apis, hence a single config variable for all apis. See: https://raw.githubusercontent.com/kubernetes-client/python/master/kubernetes/client/apis/core_v1_api.py Note that if no _request_timeout is specified, the kubernetes client will wait indefinitely for kubernetes api responses, which will cause the scheduler to hang. The timeout is specified as [connect timeout, read timeout]</description>
+  </property>
+  <property>
+      <name>run_as_user</name>
+      <value></value>
+      <display-name>Run as user</display-name>
+      <description>Specifies the uid to run the first process of the worker pods containers as</description>
+      <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+      </value-attributes>
+  </property>
+  <property>
+      <name>fs_group</name>
+      <value></value>
+      <display-name>FS group</display-name>
+      <description>Specifies a gid to associate with all containers in the worker pods if using a git_ssh_key_secret_name use an fs_group that allows for the key to be read, e.g. 65533</description>
       <value-attributes>
           <empty-value-valid>true</empty-value-valid>
       </value-attributes>

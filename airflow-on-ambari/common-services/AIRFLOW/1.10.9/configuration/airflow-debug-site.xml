@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration supports_final="true">
+  <property>
+    <name>fail_fast</name>
+    <value>False</value>
+    <display-name>Fail fast</display-name>
+    <description>Used only with DebugExecutor. If set to True DAG will fail with first failed task. Helpful for debugging purposes.</description>
+  </property>
+</configuration>

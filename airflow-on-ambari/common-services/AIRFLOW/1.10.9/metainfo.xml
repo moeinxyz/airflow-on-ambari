@@ -1,20 +1,4 @@
 <?xml version="1.0"?>
-<!--
-   Licensed to the Apache Software Foundation (ASF) under one or more
-   contributor license agreements.  See the NOTICE file distributed with
-   this work for additional information regarding copyright ownership.
-   The ASF licenses this file to You under the Apache License, Version 2.0
-   (the "License"); you may not use this file except in compliance with
-   the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
--->
 <metainfo>
 	<schemaVersion>2.0</schemaVersion>
 	<services>
@@ -84,13 +68,13 @@
 				</osSpecific>
 			</osSpecifics>
 			<configuration-dependencies>
-				<config-type>airflow-env</config-type>
 				<config-type>airflow-admin-site</config-type>
 				<config-type>airflow-api-site</config-type>
 				<config-type>airflow-celery-site</config-type>
 				<config-type>airflow-cli-site</config-type>
 				<config-type>airflow-core-site</config-type>
 				<config-type>airflow-dask-site</config-type>
+				<config-type>airflow-debug-site</config-type>
 				<config-type>airflow-email-site</config-type>
 				<config-type>airflow-githubenterprise-site</config-type>
 				<config-type>airflow-kerberos-site</config-type>
@@ -98,6 +82,7 @@
 				<config-type>airflow-mesos-site</config-type>
 				<config-type>airflow-operators-site</config-type>
 				<config-type>airflow-scheduler-site</config-type>
+				<config-type>airflow-sentry-site</config-type>
 				<config-type>airflow-smtp-site</config-type>
 				<config-type>airflow-webserver-site</config-type>
 				<config-type>airflow-lineage-site</config-type>
@@ -105,8 +90,12 @@
 				<config-type>airflow-hive-site</config-type>
 				<config-type>airflow-celerybrokertransportoptions-site</config-type>
 				<config-type>airflow-elasticsearch-site</config-type>
+				<config-type>airflow-elasticsearchconfigs-site</config-type>
 				<config-type>airflow-kubernetes-site</config-type>
 				<config-type>airflow-kubernetessecrets-site</config-type>
+				<config-type>airflow-kubernetesannotations-site</config-type>
+				<config-type>airflow-kubernetesenvironmentvariables-site</config-type>
+				<config-type>airflow-kuberneteslabels-site</config-type>
 			</configuration-dependencies>
 			<restartRequiredAfterChange>true</restartRequiredAfterChange>
 

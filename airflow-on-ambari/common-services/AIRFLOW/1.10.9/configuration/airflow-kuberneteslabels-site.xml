@@ -3,6 +3,8 @@
 <configuration supports_final="true">
     <!--
         The Key-value pairs to be given to worker pods.
-        The worker pods will be scheduled to the nodes of the specified key-value pairs.
+        The worker pods will be given these static labels, as well as some additional dynamic labels
+        to identify the task.
+        Should be supplied in the format: ``key = value``
     -->
 </configuration>

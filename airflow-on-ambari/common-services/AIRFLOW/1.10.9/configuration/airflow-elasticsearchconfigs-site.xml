@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration supports_final="true">
+  <property>
+    <name>use_ssl</name>
+    <value>False</value>
+    <display-name>User SSL</display-name>
+    <description></description>
+  </property>
+  <property>
+    <name>verify_certs</name>
+    <value>True</value>
+    <display-name>Verify certs</display-name>
+    <description></description>
+  </property>
+</configuration>

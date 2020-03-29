@@ -2,10 +2,10 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration supports_final="true">
   <property>
-    <name>default_hive_mapred_queue</name>
+    <name>sentry_dsn</name>
     <value></value>
-    <display-name>Default hive mapred queue</display-name>
-    <description>Default mapreduce queue for HiveOperator tasks.</description>
+    <display-name>Sentry DNS</display-name>
+    <description>Sentry (https://docs.sentry.io) integration</description>
     <value-attributes>
       <empty-value-valid>true</empty-value-valid>
     </value-attributes>

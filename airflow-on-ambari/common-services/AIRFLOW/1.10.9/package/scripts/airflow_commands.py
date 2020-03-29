@@ -132,12 +132,18 @@ def generate_airflow_config_file(params):
     airflow_config = generate_airflow_sectional_configuration({
         "core": params.config['configurations']['airflow-core-site'],
         "cli": params.config['configurations']['airflow-cli-site'],
+        "debug": params.config['configurations']['airflow-debug-site'],
         "api": params.config['configurations']['airflow-api-site'],
+        "lineage": params.config['configurations']['airflow-lineage-site'],
+        "atlas": params.config['configurations']['airflow-atlas-site'],
         "operators": params.config['configurations']['airflow-operators-site'],
+        "hive": params.config['configurations']['airflow-hive-site'],
         "webserver": params.config['configurations']['airflow-webserver-site'],
         "email": params.config['configurations']['airflow-email-site'],
         "smtp": params.config['configurations']['airflow-smtp-site'],
+        "sentry": params.config['configurations']['airflow-sentry-site'],
         "celery": params.config['configurations']['airflow-celery-site'],
+        "celery_broker_transport_options": params.config['configurations']['airflow-celerybrokertransportoptions-site'],
         "dask": params.config['configurations']['airflow-dask-site'],
         "scheduler": params.config['configurations']['airflow-scheduler-site'],
         "ldap": params.config['configurations']['airflow-ldap-site'],
@@ -145,14 +151,14 @@ def generate_airflow_config_file(params):
         "kerberos": params.config['configurations']['airflow-kerberos-site'],
         "github_enterprise": params.config['configurations']['airflow-githubenterprise-site'],
         "admin": params.config['configurations']['airflow-admin-site'],
-        "lineage": params.config['configurations']['airflow-lineage-site'],
-        "atlas": params.config['configurations']['airflow-atlas-site'],
-        "hive": params.config['configurations']['airflow-hive-site'],
-        "celery_broker_transport_options": params.config['configurations']['airflow-celerybrokertransportoptions-site'],
         "elasticsearch": params.config['configurations']['airflow-elasticsearch-site'],
+        "elasticsearch_configs": params.config['configurations']['airflow-elasticsearchconfigs-site'],
         "kubernetes": params.config['configurations']['airflow-kubernetes-site'],
         "kubernetes_node_selectors": params.config['configurations']['airflow-kubernetesnodeselectors-site'],
-        "kubernetes_secrets": params.config['configurations']['airflow-kubernetessecrets-site']
+        "kubernetes_annotations": params.config['configurations']['airflow-kubernetesannotations-site'],
+        "kubernetes_environment_variables": params.config['configurations']['airflow-kubernetesenvironmentvariables-site'],
+        "kubernetes_secrets": params.config['configurations']['airflow-kubernetessecrets-site'],
+        "kubernetes_labels": params.config['configurations']['airflow-kuberneteslabels-site']
     }, params)
 
     for section, value in airflow_config.items():

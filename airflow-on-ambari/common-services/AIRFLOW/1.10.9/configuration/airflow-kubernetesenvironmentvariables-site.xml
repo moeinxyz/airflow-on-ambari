@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration supports_final="true">
+    <!--
+      The Key-value annotations pairs to be given to worker pods.
+      Should be supplied in the format: key = value
+    -->
+</configuration>

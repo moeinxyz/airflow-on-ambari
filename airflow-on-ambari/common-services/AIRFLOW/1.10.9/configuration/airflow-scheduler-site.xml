@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-       http://www.apache.org/licenses/LICENSE-2.0
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 <configuration supports_final="true">
   <property>
     <name>job_heartbeat_sec</name>
-    <value>50</value>
+    <value>5</value>
     <display-name>Job heartbeat sec</display-name>
     <description>Task instances listen for external kill signal (when you clear tasks from the CLI or the UI), this defines the frequency at which they should listen (in seconds).</description>
   </property>
   <property>
     <name>scheduler_heartbeat_sec</name>
-    <value>50</value>
+    <value>5</value>
     <display-name>Scheduler heartbeat sec</display-name>
     <description>The scheduler constantly tries to trigger new tasks (look at the scheduler section in the docs for more information). This defines how often the scheduler should run (in seconds).</description>
   </property>
@@ -35,6 +20,12 @@
     <description>After how much time should the scheduler terminate in seconds. -1 indicates to run continuously (see also num_runs).</description>
   </property>
   <property>
+    <name>num_runs</name>
+    <value>-1</value>
+    <display-name>Number runs</display-name>
+    <description>The number of times to try to schedule each DAG file .-1 indicates unlimited number</description>
+  </property>
+  <property>
     <name>min_file_process_interval</name>
     <value>0</value>
     <display-name>Min file process interval</display-name>
@@ -42,7 +33,7 @@
   </property>
   <property>
     <name>dag_dir_list_interval</name>
-    <value>150</value>
+    <value>300</value>
     <display-name>Dag dir list interval</display-name>
     <description>Dag dir list interval.</description>
   </property>
@@ -51,6 +42,12 @@
     <value>10</value>
     <display-name>Print stats interval</display-name>
     <description>How often should stats be printed to the logs.</description>
+  </property>
+  <property>
+    <name>scheduler_health_check_threshold</name>
+    <value>30</value>
+    <display-name>Scheduler health check threshold</display-name>
+    <description>If the last scheduler heartbeat happened more than scheduler_health_check_threshold ago (in seconds), scheduler is considered unhealthy. This is used by the health check in the "/health" endpoint</description>
   </property>
   <property>
     <name>child_process_log_directory</name>
@@ -101,6 +98,15 @@
     <description>Statsd (https://github.com/etsy/statsd) integration settings.</description>
   </property>
   <property>
+    <name>statsd_allow_list</name>
+    <value></value>
+    <display-name>Statsd allow list</display-name>
+    <description>If you want to avoid send all the available metrics to StatsD, you can configure an allow list of prefixes to send only the metrics that start with the elements of the list (e.g: scheduler,executor,dagrun)</description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
     <name>max_threads</name>
     <value>2</value>
     <display-name>Max threads</display-name>
@@ -117,5 +123,11 @@
     <value>True</value>
     <display-name>Use jop schedule</display-name>
     <description>Turn off scheduler use of cron intervals by setting this to False.DAGs submitted manually in the web UI or with trigger_dag will still run.</description>
+  </property>
+  <property>
+    <name>allow_trigger_in_future</name>
+    <value>False</value>
+    <display-name>Allow trigger in future</display-name>
+    <description>Allow externally triggered DagRuns for Execution Dates in the future Only has effect if schedule_interval is set to None in DAG.</description>
   </property>
 </configuration>

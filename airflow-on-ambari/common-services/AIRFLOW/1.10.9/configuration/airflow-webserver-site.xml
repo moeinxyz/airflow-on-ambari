@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-       http://www.apache.org/licenses/LICENSE-2.0
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 <configuration supports_final="true">
   <property>
     <name>base_url</name>
@@ -78,7 +63,7 @@
   </property>
   <property>
     <name>secret_key</name>
-    <value>some_secret_key</value>
+    <value>temporary_key</value>
     <display-name>Secret key</display-name>
     <description>Secret key used to run your flask app.</description>
   </property>
@@ -111,6 +96,18 @@
     <value>False</value>
     <display-name>Expose config</display-name>
     <description>Expose the configuration file in the web server.</description>
+  </property>
+  <property>
+    <name>expose_hostname</name>
+    <value>True</value>
+    <display-name>Expose hostname</display-name>
+    <description>Expose hostname in the web server.</description>
+  </property>
+  <property>
+    <name>expose_stacktrace</name>
+    <value>True</value>
+    <display-name>Expose stacktrace</display-name>
+    <description>Expose stacktrace in the web server.</description>
   </property>
   <property>
     <name>authenticate</name>
@@ -189,5 +186,80 @@
     <value>False</value>
     <display-name>Enable proxy fix</display-name>
     <description>Enable werkzeug `ProxyFix` middleware</description>
+  </property>
+  <property>
+    <name>proxy_fix_x_for</name>
+    <value>1</value>
+    <display-name>Proxy fix X for</display-name>
+    <description> Number of values to trust for ``X-Forwarded-For``. More info: https://werkzeug.palletsprojects.com/en/0.16.x/middleware/proxy_fix/</description>
+  </property>
+  <property>
+    <name>proxy_fix_x_proto</name>
+    <value>1</value>
+    <display-name>Proxy fix X proto</display-name>
+    <description>Number of values to trust for ``X-Forwarded-Proto``</description>
+  </property>
+  <property>
+    <name>proxy_fix_x_host</name>
+    <value>1</value>
+    <display-name>Proxy fix X host</display-name>
+    <description>Number of values to trust for ``X-Forwarded-Host``</description>
+  </property>
+  <property>
+    <name>proxy_fix_x_port</name>
+    <value>1</value>
+    <display-name>Proxy fix X port</display-name>
+    <description>Number of values to trust for ``X-Forwarded-Port``</description>
+  </property>
+  <property>
+    <name>proxy_fix_x_prefix</name>
+    <value>1</value>
+    <display-name>Proxy fix X prefix</display-name>
+    <description>Number of values to trust for ``X-Forwarded-Prefix``</description>
+  </property>
+  <property>
+    <name>cookie_secure</name>
+    <value>False</value>
+    <display-name>Cookie secure</display-name>
+    <description>Set secure flag on session cookie</description>
+  </property>
+  <property>
+    <name>cookie_samesite</name>
+    <value></value>
+    <display-name>Cookie same site</display-name>
+    <description>Set samesite policy on session cookie</description>
+    <value-attributes>
+      <empty-value-valid>true</empty-value-valid>
+    </value-attributes>
+  </property>
+  <property>
+    <name>default_wrap</name>
+    <value>False</value>
+    <display-name>Default wrap</display-name>
+    <description>Default setting for wrap toggle on DAG code and TI log views.</description>
+  </property>
+  <property>
+    <name>x_frame_enabled</name>
+    <value>True</value>
+    <display-name>X frame enabled</display-name>
+    <description>Allow the UI to be rendered in a frame</description>
+  </property>
+  <property>
+    <name>update_fab_perms</name>
+    <value>True</value>
+    <display-name>Update fab perms</display-name>
+    <description>Update FAB permissions and sync security manager roles on webserver startup</description>
+  </property>
+  <property>
+    <name>force_log_out_after</name>
+    <value>0</value>
+    <display-name>Force log out fater</display-name>
+    <description>Minutes of non-activity before logged out from UI. 0 means never get forcibly logged out</description>
+  </property>
+  <property>
+    <name>session_lifetime_days</name>
+    <value>30</value>
+    <display-name>Session lifetime days</display-name>
+    <description>The UI cookie lifetime in days. session_lifetime_days = 30</description>
   </property>
 </configuration>
