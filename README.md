@@ -19,4 +19,12 @@ ambari-server stop
 ambari-server install-mpack --mpack=/tmp/airflow-on-ambari.tar.gz
 ambari-server start
 ```
-After installing mpack, go to **Stack and Version** in ambari panel, click on **Add service** for **Airflow** and follow the wizard for installation.
+After installing mpack, go to **Stack and Versions** in ambari panel, click on **Add service** for **Airflow** and follow the wizard for installation.
+
+### Screenshots
+##### Airflow in Stack and Versions
+![Airflow in Stack and Versions](https://raw.githubusercontent.com/moein7tl/airflow-on-ambari/e74d0fb4a66d5e312685a60dc350a23d2687fd33/docs/screenshots/Screenshot-StacksAndVersions.png)
+##### Manage and monitor airflow by ambari
+![Manage and monitor airflow by ambari](https://raw.githubusercontent.com/moein7tl/airflow-on-ambari/e74d0fb4a66d5e312685a60dc350a23d2687fd33/docs/screenshots/Screenshot-AirflowGreenStatus.png)
+##### Airflow configurations
+![Airflow configuration management](https://raw.githubusercontent.com/moein7tl/airflow-on-ambari/e74d0fb4a66d5e312685a60dc350a23d2687fd33/docs/screenshots/Screenshot-AirflowConfigurations.png)
